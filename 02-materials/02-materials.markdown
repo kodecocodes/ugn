@@ -48,9 +48,9 @@ The two nodes on the left define the values **0** and **1**. The node on the rig
 
 ![unreal engine wounds](images/03.png)
 
-As you can see, this is actually just a visual way of writing the expression `(0 + 1) * 5`. In fact, you can express a large variety of mathematical expressions as node expressions. The example above is very simple but you can actually use materials to perform complex maths too. A popular exercise for learning advanced materials is to simulate an ocean using Gerstner Waves.
+As you can see, this is actually just a visual way of writing the expression `(0 + 1) * 5`. In fact, you can express a large variety of mathematical expressions as node expressions. The example above is very simple but you can actually use materials to perform complex maths too. For example, a popular exercise for learning advanced materials is to simulate an ocean using Gerstner Waves.
 
-Most nodes will also have at least one input pin on the left-hand side and at least one output on the right-hand side. An exception to this is the **Result** node.
+Most nodes will have at least one input pin on the left-hand side and at least one output on the right-hand side. An exception to this is the **Result** node.
 
 ### The Result node
 
@@ -228,13 +228,13 @@ Luckily, Unreal provides a way to change values without recompiling. Say hello t
 
 You can think of a material instance as a copy of a parent material. The difference is that you cannot edit the material graph in a material instance but you _can_ change the values of any parameters you create in the parent material. And as mentioned before, you can do this without recompiling.
 
-Before you create a material instance, you'll need to set up a speed parameter in the background material. Open **M_Background** and then create two **ScalarParameter** nodes. Rename them to **SpeedX** and **SpeedY**.
+There are a lot of parameter types but the ones you will use the most are **scalars**, **vectors** and **textures**. For this material, you'll need to use scalar parameters. These hold a single numeric value.
+
+Open **M_Background** and then create two **ScalarParameter** nodes. Rename them to **SpeedX** and **SpeedY**.
 
 ![unreal engine wounds](images/29.png)
 
->**Note**: If you only provide a single value, the Panner will scroll the texture on both axes. To separate the speed for each axis, you need to provide two values.
-
-Now, you need to hook these up to the Panner. The problem is that there is only one input for speed. To get around this, you can combine the two parameters to create a two channel vector. To do this, create an **AppendVector** node and then connect everything like so:
+The reason you need two parameters is because the Panner uses separate speeds for each axis. The problem now is that you have two values but there is only one input for speed. This is because the Panner expects you to provide both speeds as a two channel vector. To do this, combine the two parameters using an **AppendVector** node and then connect everything like so:
 
 ![unreal engine wounds](images/30.png)
 
